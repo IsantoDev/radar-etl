@@ -15,7 +15,7 @@ Projeto desenvolvido para automatizar a coleta, análise e distribuição de int
 ## 🚀 Como Rodar
 
 1. Clone o repositório:
-   git clone https://github.com/IgorBiodev/radar-etl.git
+   git clone https://github.com/IsantoDev/radar-etl.git
    cd radar-etl
 
 2. Crie e ative o ambiente virtual (Recomendado):
