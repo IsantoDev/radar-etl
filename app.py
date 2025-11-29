@@ -4,6 +4,8 @@ import google.generativeai as genai
 from ddgs import DDGS
 import smtplib
 from email.message import EmailMessage
+import schedule
+import time
 
 
 load_dotenv()
@@ -46,7 +48,7 @@ class Resumidor:
         return resposta.text
         
 
-    
+
 
 class Notificador:
     def __init__(self):
@@ -72,9 +74,9 @@ class Notificador:
             print("✅ Missão cumprida. E-mail enviado.")
 
 
-if __name__ == "__main__":
-    print("Sistema iniciado.")
-    
+def tardefa_diaria():
+    print('Hora de trabalhar! Iniciando pipeline...')
+
     scout = Buscador() 
     analista = Resumidor()
     dados = scout.procurar("Novas noticias Engenharia de IA")
@@ -85,6 +87,20 @@ if __name__ == "__main__":
 
     carteiro = Notificador()
     carteiro.enviar(relatorio_final, 'igorcodd@gmail.com')
+
+
+if __name__ == "__main__":
+    print("Sistema iniciado.")
+
+    schedule.every().day.at('07:52').do(tardefa_diaria)
+
+    print('Aguardando horario agendado...')
+
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
+    
+   
 
 
 
