@@ -2,6 +2,8 @@ import os
 from dotenv import load_dotenv
 import google.generativeai as genai
 from ddgs import DDGS
+import smtplib
+from email.message import EmailMessage
 
 
 load_dotenv()
@@ -12,7 +14,7 @@ class Buscador:
 
     def procurar(self, termo):
         with DDGS() as dk:
-            texto = dk.text(termo, max_results=30)
+            texto = dk.text(termo, max_results=17)
             return texto
 
 
@@ -48,11 +50,26 @@ class Resumidor:
 
 class Notificador:
     def __init__(self):
-        pass
+        
+        self.email_origem = os.getenv("EMAIL_REMETENTE")
+        self.senha_app = os.getenv("EMAIL_SENHA")
 
-    def enviar(self,resumo):
- 
-        pass
+    def enviar(self, relatorio_final, destinatario):
+        
+        msg = EmailMessage()
+        msg.set_content(relatorio_final) 
+        msg['Subject'] = "Relatório Diário: Inteligência Artificial"
+        msg['From'] = self.email_origem
+        msg['To'] = destinatario
+
+        print(f"Disparando e-mail para {destinatario}...")
+
+        with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+      
+            smtp.login(user=self.email_origem, password=self.senha_app)
+            
+            smtp.send_message(msg)
+            print("✅ Missão cumprida. E-mail enviado.")
 
 
 if __name__ == "__main__":
@@ -64,7 +81,11 @@ if __name__ == "__main__":
 
     relatorio_final = analista.resumir(dados)
 
-    print(relatorio_final)
+    print('Relatorio gerado, enviando email...')
+
+    carteiro = Notificador()
+    carteiro.enviar(relatorio_final, 'igorcodd@gmail.com')
+
 
 
     
