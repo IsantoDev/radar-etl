@@ -13,7 +13,9 @@ Projeto desenvolvido para automatizar a coleta, análise e distribuição de int
 * **Automação:** `schedule` (Agendamento de tarefas e Loop Infinito)
 
 ## 🚀 Como Rodar
-´´´bash
+
+```bash
+
 1. Clone o repositório:
    git clone https://github.com/IsantoDev/radar-etl.git
    cd radar-etl
@@ -39,7 +41,8 @@ Projeto desenvolvido para automatizar a coleta, análise e distribuição de int
 
 6. Execute o pipeline:
    python app.p
-´´´´
+
+```
 
 ## 👨‍💻 Autor
 Desenvolvido por Igor Santos.
