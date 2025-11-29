@@ -28,17 +28,19 @@ Projeto desenvolvido para automatizar a coleta, análise e distribuição de int
    source venv/bin/activate
 
 3. Instale as dependências:
-   pip install -r requirements.txt
+'''
+ pip install -r requirements.txt
 
-4. Configure as chaves de acesso:
+5. Configure as chaves de acesso:
    Crie um arquivo chamado .env na raiz do projeto e adicione suas credenciais (sem aspas):
    
    GEMINI_API_KEY=sua_chave_do_aistudio_google
    EMAIL_REMETENTE=seu_email@gmail.com
    EMAIL_SENHA=sua_senha_de_app_do_google
 
-5. Execute o pipeline:
+6. Execute o pipeline:
    python app.py
+'''
 
 ## 👨‍💻 Autor
 Desenvolvido por Igor Santos.
