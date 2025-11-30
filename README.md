@@ -40,7 +40,7 @@ Projeto desenvolvido para automatizar a coleta, análise e distribuição de int
    EMAIL_SENHA=sua_senha_de_app_do_google
 
 6. Execute o pipeline:
-   python app.p
+   python app.py
 
 ```
 
