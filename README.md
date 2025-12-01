@@ -91,14 +91,6 @@ Prompt Engineering: O sistema utiliza prompts otimizados para garantir que os re
 
 Robustez: Tratamento de erros para falhas de requisição e limites de quota da API.
 
-🔮 Próximos Passos (Roadmap)
-[ ] Implementar banco de dados (SQLite/Postgres) para histórico de notícias.
-
-[ ] Migrar execução para Nuvem (AWS Lambda ou Google Cloud Functions).
-
-[ ] Adicionar análise de sentimento sobre as notícias (Bullish/Bearish).
-
-[ ] Interface Web (Streamlit) para visualização do dashboard.
 
 👨‍💻 Autor
 Desenvolvido por Igor Santos Engenheiro de Automação & IA em formação
