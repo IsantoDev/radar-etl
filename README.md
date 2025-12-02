@@ -1,96 +1,77 @@
-# 📡 AI-Radar ETL: Pipeline Automatizado de Inteligência
+# 📡 AI-Radar ETL
 
-![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=for-the-badge&logo=python)
-![Gemini](https://img.shields.io/badge/AI-Gemini_1.5_Flash-orange?style=for-the-badge&logo=google)
-![Status](https://img.shields.io/badge/Status-Production-success?style=for-the-badge)
+> **Seu Agente de Inteligência de Mercado.** Um pipeline ETL autônomo que monitora, filtra e resume as novidades tech diariamente.
 
-> **Um pipeline ETL autônomo que monitora, filtra e sintetiza notícias de mercado utilizando Inteligência Artificial Generativa.**
-
----
-
-## 🎯 O Problema
-Manter-se atualizado com o volume massivo de notícias sobre tecnologia e IA consome horas valiosas. Feed readers tradicionais apenas agregam links, exigindo leitura manual e filtro de ruído.
-
-## 💡 A Solução
-O **AI-Radar ETL** não é apenas um raspador. É um **agente de curadoria**. Ele automatiza o ciclo de inteligência:
-1.  **Extract (Extração):** Monitora múltiplas fontes de notícias em tempo real.
-2.  **Transform (Transformação):** Utiliza o LLM **Google Gemini** para ler o conteúdo, filtrar o que é irrelevante (ruído) e gerar resumos executivos focados em impacto técnico.
-3.  **Load (Carregamento):** Compila um relatório estruturado e envia via e-mail matinal automatizado.
+![Python](https://img.shields.io/badge/Python-3.12-blue?logo=python&logoColor=white)
+![AI](https://img.shields.io/badge/AI-Google%20Gemini-orange?logo=google&logoColor=white)
+![Automation](https://img.shields.io/badge/Automation-Daemon-green)
 
 ---
 
-## 🏗️ Arquitetura do Sistema
+## 💡 O Problema
+O volume de notícias sobre IA é avassalador. Acompanhar lançamentos, novas ferramentas e tendências manualmente consome horas preciosas e gera "FOMO" (Fear Of Missing Out).
 
-O fluxo de dados segue uma abordagem linear de pipeline:
+## 🛠️ A Solução
+O **AI-Radar** é um Agente Autônomo que roda em segundo plano (Daemon). Ele atua como um Analista de Inteligência pessoal.
+1.  **Extração (Extract):** O sistema varre a web em busca de notícias recentes usando a API do **DuckDuckGo**.
+2.  **Transformação (Transform):** Utiliza o **Google Gemini 1.5** para ler as manchetes, filtrar o ruído (clickbait) e gerar um resumo executivo técnico.
+3.  **Carga (Load):** Entrega o relatório formatado diretamente na caixa de entrada (E-mail) do usuário via SMTP.
 
-```mermaid
-graph LR
-    A[🌐 Web Sources] -->|Scraping Request| B(🕵️ Engine de Coleta)
-    B -->|Raw HTML/Text| C{🧠 AI Processor}
-    C -->|Prompt Engineering| D[Google Gemini API]
-    D -->|Summarized Data| E[📊 Data Formatting]
-    E -->|HTML Report| F[📧 Email Dispatcher]
-    F -->|Morning Briefing| G((👤 Usuário Final))
-```
+---
 
-🛠️ Tech Stack
-Linguagem: Python 3.x
+## 🏗️ Stack Tecnológico
 
-Core AI: Google Generative AI SDK (google-generativeai)
+O projeto aplica conceitos de **Engenharia de Dados** e **Automação Inteligente**.
 
-Orquestração/Dados: Pandas (Manipulação de Dataframes), Requests/BeautifulSoup (Coleta).
+* **Linguagem:** Python 3.12
+* **IA Core:** `Google Generative AI` (Gemini API)
+* **Web Scraping:** `duckduckgo-search` (Busca sem API Key)
+* **Orquestração:** `schedule` (Agendamento de Tarefas) & `smtplib` (Protocolo de E-mail)
+* **Resiliência:** Implementação de `Polite Polling` e tratamento de erros de conexão (`try/except` com backoff).
 
-Notificações: SMTP Lib (Automação de e-mail).
+---
 
-Segurança: Gestão de credenciais via Variáveis de Ambiente (python-dotenv).
+## 🚀 Como rodar localmente
 
-🚀 Como Rodar Localmente
-Pré-requisitos
-Python instalado.
+Se você quiser testar este agente na sua máquina:
 
-Uma API Key do Google Gemini (AI Studio).
+1.  **Clone o repositório:**
+    ```bash
+    git clone [https://github.com/IsantoDev/radar-etl.git](https://github.com/IsantoDev/radar-etl.git)
+    cd radar-etl
+    ```
 
-Uma senha de aplicativo do seu provedor de e-mail (para envio SMTP).
+2.  **Instale as dependências:**
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-Instalação
-Clone o repositório:
+3.  **Configure as Chaves:**
+    * Crie um arquivo `.env` na raiz.
+    * Adicione suas credenciais:
+      ```env
+      GEMINI_API_KEY="sua_chave_aqui"
+      EMAIL_ADDRESS="seu_email@gmail.com"
+      EMAIL_PASSWORD="senha_de_app_do_google"
+      ```
 
-```Bash
+4.  **Execute o Agente:**
+    ```bash
+    python app.py
+    ```
+    *(O robô ficará rodando em loop, aguardando o horário agendado).*
 
-git clone https://github.com/IsantoDev/radar-etl.git
-cd radar-etl
-Instale as dependências:
-```
+---
 
-```Bash
+## 🧠 Estrutura do Código
 
-pip install -r requirements.txt
+* **`app.py`**: O Orquestrador. Gerencia o loop de vida do agente e conecta os módulos.
+* **Módulo Buscador**: Classe responsável pela conexão com a web e extração de dados brutos.
+* **Módulo Resumidor**: Classe que encapsula a inteligência da LLM para processar o texto.
+* **Módulo Notificador**: Classe responsável pela entrega (Delivery) da informação.
 
-```
-Configure o Ambiente: Crie um arquivo .env na raiz do projeto e adicione suas chaves (NUNCA suba suas chaves para o GitHub!):
+---
 
-```Bash
-Snippet de código
+### 👨‍💻 Autor
 
-GEMINI_API_KEY="sua_chave_aqui"
-EMAIL_SENDER="seu_email@gmail.com"
-EMAIL_PASSWORD="sua_senha_de_app"
-EMAIL_RECEIVER="email_destino@gmail.com"
-Execute a Pipeline:
-```
-
-```Bash
-
-python main.py
-```
-
-🧠 Destaques de Engenharia (Why this matters)
-Semantic Filtering: Ao contrário de filtros baseados em palavras-chave (Regex), este projeto usa a compreensão semântica do LLM para decidir se uma notícia é realmente sobre "Avanços em IA" ou apenas marketing, reduzindo falsos positivos.
-
-Prompt Engineering: O sistema utiliza prompts otimizados para garantir que os resumos sejam técnicos e diretos, evitando alucinações comuns em modelos de linguagem.
-
-Robustez: Tratamento de erros para falhas de requisição e limites de quota da API.
-
-
-👨‍💻 Autor
-Desenvolvido por Igor Santos Engenheiro de Automação & IA em formação
+Desenvolvido por **[Igor Santos](https://www.linkedin.com/in/isantosdev/)**
